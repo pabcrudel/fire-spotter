@@ -1,9 +1,13 @@
 name: Deploy Static Website
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
+    paths:
+      - website/**
+      - .github/workflows/deploy.yml
 
 jobs:
   ci-cd:
