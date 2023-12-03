@@ -1,3 +1,6 @@
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+
 // Creates a map
 export const map = L.map('map', {
   zoomControl: false
