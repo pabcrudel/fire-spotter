@@ -11,5 +11,8 @@
   "devDependencies": {
     "fast-glob": "^3.3.2",
     "vite": "^5.0.4"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4"
   }
 }
