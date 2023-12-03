@@ -1,4 +1,4 @@
-[
+export const countries = [
   { "abbreviation": "ABW", "name": "Aruba", "coordinates": [12.5211, -69.9683] },
   { "abbreviation": "AFG", "name": "Afghanistan", "coordinates": [33.9391, 67.7099] },
   { "abbreviation": "AGO", "name": "Angola", "coordinates": [-11.2027, 17.8739] },
