@@ -1,5 +1,6 @@
 import { pointsTracker } from './wildfire-tracker.js';
 import { redIcon, map, countryMarker, drawLinesWithSecondaryLines } from './map-builder.js';
+import { countries } from './countries.js';
 
 async function pointsPrinter(source, country) {
   const { abbreviation, name, coordinates } = country;
@@ -84,9 +85,6 @@ function getWithTTL(key) {
 };
 
 async function main() {
-  const rawCountries = await fetch('assets/js/countries.json');
-  const countries = await rawCountries.json();
-  
   const defaultCountry = "Spain";
   const country = (countryName) =>
     countries.find(country => country.name === countryName);
