@@ -10,7 +10,7 @@ export default defineConfig({
   root: sourceFolder,
   build: {
     /* Because of `root path` has changed, `ourDir` and `emptyOutDir` must be
-    * specify.
+    * specified.
     * - `ourDir`: is relative to `root path`
     * - `emptyOutDir`: true === override
     */
