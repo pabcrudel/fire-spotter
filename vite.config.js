@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import glob from 'fast-glob';
-import path from 'path';
+import { resolve } from 'path';
 
 /** Specify which is the source folder name */
 const sourceFolder = 'website';
@@ -18,8 +18,8 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: glob.sync(`./${sourceFolder}/**/*.html`).map(
-        entry => path.resolve(__dirname, entry)
-      )
+        entry => resolve(__dirname, entry)
+      ),
     },
   },
 })
