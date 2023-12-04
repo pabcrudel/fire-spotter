@@ -3,7 +3,7 @@ import glob from 'fast-glob';
 import path from 'path';
 
 /** Specify which is the source folder name */
-const sourceFolder = 'src';
+const sourceFolder = 'website';
 
 export default defineConfig({
   base: './',
