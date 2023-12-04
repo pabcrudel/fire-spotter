@@ -44,7 +44,7 @@ function showCurrentLocation() {
 
 // Create a custom red icon marker
 export const redIcon = L.icon({
-  iconUrl: "assets/img/fueguito.png",
+  iconUrl: "images/fueguito.png",
   iconSize: [25, 41],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
