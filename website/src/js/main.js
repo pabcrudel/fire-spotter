@@ -1,7 +1,7 @@
 import { pointsTracker } from './wildfire-tracker.js';
 import { redIcon, map, countryMarker, drawLinesWithSecondaryLines } from './map-builder.js';
 import L from 'leaflet';
-import { countries } from './countries.js';
+import countries from './countries.json';
 
 async function pointsPrinter(source, country) {
   const { abbreviation, name, coordinates } = country;
