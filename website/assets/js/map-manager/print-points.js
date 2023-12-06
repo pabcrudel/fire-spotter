@@ -1,4 +1,6 @@
 import { addMarker } from './add-marker';
+import fireIcon from '../../img/fire.svg';
+import hotSpotIcon from '../../img/hot-spot.svg';
 
 export async function printPoints(map, countryLayer, spotterResult) {
   const { trackedPoints, source, coordinates } = spotterResult;
@@ -31,8 +33,8 @@ export async function printPoints(map, countryLayer, spotterResult) {
           `<p>Wind speed: ${windSpeed} meters/sec</p>` +
           '';
 
-        const iconName = isFire ? 'fire' : 'hot-spot';
-        const pointMarker = await addMarker([latitude, longitude], iconName);
+        const markerIcon = isFire ? fireIcon : hotSpotIcon;
+        const pointMarker = await addMarker([latitude, longitude], markerIcon);
         pointMarker.bindTooltip(toolTip);
 
         countryLayer.addLayer(pointMarker);
