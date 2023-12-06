@@ -1,7 +1,10 @@
 import { addMarker } from './add-marker';
 
-export async function printPoints(spotterResult) {
-  const { trackedPoints, source, countryLayer } = spotterResult;
+export async function printPoints(map, countryLayer, spotterResult) {
+  const { trackedPoints, source, coordinates } = spotterResult;
+
+  countryLayer.clearLayers();
+  map.setView(coordinates, 6);
 
   for (const type in trackedPoints) {
     for (const points of trackedPoints[type]) {
