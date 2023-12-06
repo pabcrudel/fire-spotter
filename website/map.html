@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .html {
+      box-sizing: border-box;
+    }
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+    
+    .selectors {
+      display: flex;
+      justify-content: center;
+    }
+    
+    .map {
+      height: 600px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Map</h1>
+
+  <div id="selectorContainer" class="selectors">
+    <select id="country" name="country"></select>
+    <select id="source" name="source"></select>
+  </div>
+  <div id="map" class="map"></div>
+
+  <script type="module" src="assets/js/spotter.js"></script>
+</body>
+</html>
