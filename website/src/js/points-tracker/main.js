@@ -1,4 +1,4 @@
-async function pointsTracker(source, countryAbbreviation) {
+export async function pointsTracker(source, countryAbbreviation) {
   // Gets points from FIRMS API
   const { getFirmsData } = await import('./utils/firms-data');
   let points = await getFirmsData(source, countryAbbreviation);
