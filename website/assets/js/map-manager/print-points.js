@@ -34,8 +34,10 @@ export async function printPoints(map, countryLayer, spotterResult) {
           '';
 
         const markerIcon = isFire ? fireIcon : hotSpotIcon;
-        const pointMarker = await addMarker([latitude, longitude], markerIcon);
-        pointMarker.bindTooltip(toolTip);
+        const pointMarker = await addMarker(
+          [latitude, longitude],
+          markerIcon, toolTip
+        );
 
         countryLayer.addLayer(pointMarker);
 

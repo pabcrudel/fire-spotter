@@ -1,6 +1,6 @@
 import L from 'leaflet';
 
-export async function addMarker(coordinates, markerIcon) {
+export async function addMarker(coordinates, markerIcon, toolTip) {
   return L.marker(coordinates,
     {
       icon: L.icon({
@@ -11,5 +11,5 @@ export async function addMarker(coordinates, markerIcon) {
         shadowSize: [41, 41]
       })
     }
-  );
+  ).bindTooltip(toolTip);
 }
