@@ -3,9 +3,18 @@ import { Spotter } from './spotter-class';
 import { printPoints } from './map-manager/print-points';
 import { moveToUserLocation } from './map-manager/move-to-user-location';
 
-main('Spain', 0);
-async function main(defaultCountryName, defaultSourceIndex) {
-  const { map, countryLayer } = initMap();
+main('Spain', 0, 6);
+async function main(defaultCountryName, defaultSourceIndex, defaultZoom) {
+  // Create the Spotter with the default country and source
+  const spotter = new Spotter(defaultCountryName, defaultSourceIndex);
+
+  // Get the coordinates and create a map there with the default zoom level
+  const defaultCoordinates = spotter.getCoordinates;
+  const { map, countryLayer } = initMap(defaultCoordinates, defaultZoom);
+
+  // Get the spotter info from this country and print them on the layer map
+  const spotterInfo = await spotter.getPoints();
+  await printPoints(countryLayer, spotterInfo);
 
   // Adds a event listener to the button
   const getLocationButton = document.getElementById("getLocationButton");
@@ -13,9 +22,7 @@ async function main(defaultCountryName, defaultSourceIndex) {
     "click", (event) => moveToUserLocation(map, event.target)
   );
 
-  const spotter = new Spotter(defaultCountryName, defaultSourceIndex);
-  await printPoints(map, countryLayer, await spotter.getPoints());
-
+  // Create a Selector to change country and source
   const countries = spotter.getCountries;
   const sources = spotter.getSources;
 
@@ -29,16 +36,12 @@ async function main(defaultCountryName, defaultSourceIndex) {
     createOption(sourceSelector, source, sources[defaultSourceIndex]);
   }
 
-  /*
-    `.bind()` aims that `this.` inside the functions are the same as the
-    instantiated `spotter` object
-  */
-  addChangeListener(
-    map, countryLayer, countrySelector, spotter.changeCountry.bind(spotter)
-  );
-  addChangeListener(
-    map, countryLayer, sourceSelector, spotter.changeSource.bind(spotter)
-  );
+  countrySelector.addEventListener('change', async (event) => changeAction(
+    event.target, map, countryLayer, spotter, printPoints
+  ));
+  sourceSelector.addEventListener('change', async (event) => changeAction(
+    event.target, map, countryLayer, spotter, printPoints
+  ));
 }
 
 function createOption(selector, entry, defaultEntry) {
@@ -55,8 +58,23 @@ function createOption(selector, entry, defaultEntry) {
   selector.appendChild(option);
 }
 
-function addChangeListener(map, countryLayer, selector, action) {
-  selector.addEventListener('change', async (event) =>
-    await printPoints(map, countryLayer, await action(event.target.value))
-  );
+async function changeAction(target, map, countryLayer, spotter, printPoints) {
+  // Clear map layer
+  countryLayer.clearLayers();
+
+  // Change the value depending on the target Id
+  const value = target.value;
+  switch (target.id) {
+    case 'country':
+      spotter.changeCountry(value);
+
+      // Smooth movement to the new coordinates
+      map.flyTo(spotter.getCoordinates);
+    break;
+    case 'source': spotter.changeSource(value); break;
+    default: break;
+  }
+
+  // Print spotter info into the map
+  await printPoints(countryLayer, await spotter.getPoints());
 }

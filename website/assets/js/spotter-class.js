@@ -7,12 +7,12 @@ export class Spotter {
   // FIRMS sources
   #sources = ["VIIRS_NOAA20_NRT", "VIIRS_SNPP_NRT", "MODIS_NRT"];
 
-  #currentCountryName;
+  #currentCountry;
   #currentSource;
 
   constructor(countryName, sourceIndex) {
     // Initial country and source
-    this.#currentCountryName = countryName;
+    this.#setCountry(countryName);
     this.#currentSource = this.#sources[sourceIndex];
   }
 
@@ -26,23 +26,26 @@ export class Spotter {
     return this.#sources;
   }
 
-  /** Focuses to a new country and clear the current layer */
-  async changeCountry(name) {
-    this.#currentCountryName = name;
-
-    return this.getPoints();
+  get getCoordinates() {
+    return this.#currentCountry.coordinates;
   }
 
-  async changeSource(source) {
-    this.#currentSource = source;
+  #setCountry(name) {
+    this.#currentCountry = this.#countries.find(
+      country => country.name === name
+    );
+  }
 
-    return this.getPoints();
+  changeCountry(name) {
+    this.#setCountry(name);
+  }
+
+  changeSource(source) {
+    this.#currentSource = source;
   }
 
   async getPoints() {
-    const { abbreviation, name, coordinates } = this.#countries.find(
-      country => country.name === this.#currentCountryName
-    );
+    const { abbreviation, name } = this.#currentCountry;
 
     const source = this.#currentSource;
     const key = `${name}, ${source}`;
@@ -60,6 +63,6 @@ export class Spotter {
       setWithTTL(key, trackedPoints);
     }
 
-    return { trackedPoints, source, coordinates };
+    return { trackedPoints, source };
   }
 }
