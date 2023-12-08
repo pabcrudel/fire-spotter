@@ -3,9 +3,8 @@
  * for a specific source and country
  * */
 async function fetchFirmsData(source, countryAbbreviation) {
-  const apiPath = "https://firms.modaps.eosdis.nasa.gov/api/country/csv";
-  const apiKey = "8b8845657503cd8c75f8b4a0a7f8b177";
-  const apiUrl = apiPath + `/${apiKey}/${source}/${countryAbbreviation}/1`;
+  const apiUrl = "https://firms.modaps.eosdis.nasa.gov/api/country/csv" +
+    `/${import.meta.env.VITE_FIRMS_KEY}/${source}/${countryAbbreviation}/1`;
 
   const firmsResponse = await fetch(apiUrl);
   return await firmsResponse.text();
