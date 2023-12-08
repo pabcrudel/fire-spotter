@@ -1,0 +1,50 @@
+.html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+.mapCanvas {
+  height: 600px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.mapCanvas header {
+  display: flex;
+  justify-content: space-between;
+}
+.mapCanvas > header a {
+  max-width: 100px;
+}
+.mapCanvas > header img {
+  width: 100%;
+}
+
+.selectors {
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+}
+
+.map {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.selfPosition {
+  display: flex;
+  justify-content: center;
+}
+.selfPosition button {
+  font-size: larger;
+}
