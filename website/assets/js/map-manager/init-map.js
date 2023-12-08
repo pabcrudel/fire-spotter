@@ -1,9 +1,9 @@
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-export function initMap() {
+export function initMap(coordinates, zoom) {
   // Creates a void map without zoom control
-  const map = L.map('map', { zoomControl: false });
+  const map = L.map('map', { zoomControl: false }).setView(coordinates, zoom);
 
   // Sets the limit of the map
   const southWest = L.latLng(-85, -180);

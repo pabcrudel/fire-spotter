@@ -2,11 +2,8 @@ import { addMarker } from './add-marker';
 import fireIcon from '../../img/fire.svg';
 import hotSpotIcon from '../../img/hot-spot.svg';
 
-export async function printPoints(map, countryLayer, spotterResult) {
-  const { trackedPoints, source, coordinates } = spotterResult;
-
-  countryLayer.clearLayers();
-  map.setView(coordinates, 6);
+export async function printPoints(countryLayer, spotterInfo) {
+  const { trackedPoints, source } = spotterInfo;
 
   for (const type in trackedPoints) {
     for (const points of trackedPoints[type]) {
