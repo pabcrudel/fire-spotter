@@ -1,10 +1,17 @@
 import { initMap } from './map-manager/init-map';
 import { Spotter } from './spotter-class';
 import { printPoints } from './map-manager/print-points';
+import { moveToUserLocation } from './map-manager/move-to-user-location';
 
 main('Spain', 0);
 async function main(defaultCountryName, defaultSourceIndex) {
   const { map, countryLayer } = initMap();
+
+  // Adds a event listener to the button
+  const getLocationButton = document.getElementById("getLocationButton");
+  getLocationButton.addEventListener(
+    "click", (event) => moveToUserLocation(map, event.target)
+  );
 
   const spotter = new Spotter(defaultCountryName, defaultSourceIndex);
   await printPoints(map, countryLayer, await spotter.getPoints());
