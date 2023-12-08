@@ -23,10 +23,10 @@ jobs:
         uses: actions/setup-node@v3
 
       - name: Install dependencies
-        uses: npm ci
+        run: npm ci
 
       - name: Add secrets
-        uses: |
+        run: |
           cd website
           echo "VITE_FIRMS_KEY=${{ secrets.FIRMS_KEY }}" > .env
           echo "VITE_OPEN_WEATHER_KEY=${{ secrets.OPEN_WEATHER_KEY }}" >> .env
