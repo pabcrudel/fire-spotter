@@ -12,17 +12,27 @@ on:
 jobs:
   ci-cd:
     runs-on: ubuntu-latest
-    name: Minify & Deploy
+    name: Build & Deploy
     permissions:
       contents: write
     steps:
       - name: Checkout files
         uses: actions/checkout@v3
 
-      - name: Minify html, css and js files
-        uses: pabcrudel/static-site-optimizer@main
-        with:
-          project_path: website
+      - name: Setup Node
+        uses: actions/setup-node@v3
+
+      - name: Install dependencies
+        uses: npm ci
+
+      - name: Add secrets
+        uses: |
+          cd website
+          echo "VITE_FIRMS_KEY=${{ secrets.FIRMS_KEY }}" > .env
+          echo "VITE_OPEN_WEATHER_KEY=${{ secrets.OPEN_WEATHER_KEY }}" >> .env
+
+      - name: Build project
+        run: npm run build
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.4.3
