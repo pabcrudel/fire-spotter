@@ -25,6 +25,9 @@
 .mapCanvas > header img {
   width: 100%;
 }
+.mapCanvas > header, .mapCanvas > footer {
+  z-index: 2;
+}
 
 .selectors {
   display: flex;
@@ -38,7 +41,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: -1;
+  z-index: 1;
 }
 
 .selfPosition {
