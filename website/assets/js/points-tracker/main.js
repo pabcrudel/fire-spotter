@@ -21,7 +21,11 @@ export async function pointsTracker(source, countryAbbreviation) {
   const { addFirePropagation } = await import('./utils/fire-propagation');
   for (const wrappedFires of points.fires) {
     for (const fire of wrappedFires) {
-      fire.propagation = addFirePropagation(fire);
+      const { temp, humidity, windDeg, windSpeed, acq_time } = fire;
+
+      fire.propagation = addFirePropagation(
+        temp, humidity, windDeg, windSpeed, acq_time
+      );
     }
   }
 

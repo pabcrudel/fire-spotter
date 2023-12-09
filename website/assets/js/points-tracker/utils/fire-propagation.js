@@ -20,8 +20,11 @@ function getFlammability(kFuelIndex, cardinalPoint) {
   return flammability[kFuelIndex][cardinalPoint];
 }
 
-export function addFirePropagation(fire) {
-  const { temp, humidity, windDeg, windSpeed, acq_time } = fire;
+export function addFirePropagation(
+  temp, humidity, windDeg, windSpeed, acq_time
+) {
+  console.log({temp, humidity, windSpeed, acq_time});
+
   const hour = +(acq_time / 100).toFixed();
 
   // Max and min historical temperature registered on earth
@@ -68,6 +71,8 @@ export function addFirePropagation(fire) {
   else if (windDeg > 225 && windDeg < 315) kFuel = kFuelPrima(3);
   else if (windDeg > 315 && windDeg < 45) kFuel = kFuelPrima(1);
   else kFuel = kFc;
+
+  console.log({kFc, kHum, K_TERR, kTemp, kFuel});
 
   return (windSpeed * 3600 * kFc * kHum * K_TERR * kTemp * kFuel);
 }
