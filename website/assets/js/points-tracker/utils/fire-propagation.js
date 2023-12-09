@@ -25,7 +25,7 @@ export function addFirePropagation(fire) {
   const hour = +(acq_time / 100).toFixed();
 
   // Max and min historical temperature registered on earth
-  const TEMP_MAX = 173.15, TEMP_MIN = 373.15;
+  const TEMP_MIN = 173.15, TEMP_MAX = 373.15;
 
   /** Rural land factor */
   const K_TERR = 0.5;
